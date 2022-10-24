@@ -219,26 +219,38 @@ $(document).ready(function () {
         console.log(data);
 
         // $.post('https://farrabswedding.free.beeceptor.com/error', data)
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+        delay();
+
         $.get('http://localhost:8080/rsvp/parties/63550e7789355bcca9b57bc8')
                 .done(function (data) {
-                    console.log("DATA")
-                    console.log(data);
-                    console.log("ERROR")
-                    console.log(data.error);
-                    console.log("RESULT")
-                    console.log(data.result);
-
                     if (data.error) {
                         $('#alert-wrapper').html(alert_markup('danger', data.message));
                     } else {
                         $('#alert-wrapper').html('');
-                        $('#rsvp-modal').modal('show');
+                        // $('#rsvp-modal').modal('show');
+                        $("#rsvp-guest-form-container").show();
+                        $("#rsvp-form-guest-name").val(data.guests[0].firstName + " " + data.guests[0].lastName).trigger('change');
                     }
                 })
                 .fail(function (data) {
                     console.log(data);
                     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
                 });
+
+        // $.get('http://localhost:8080/rsvp/parties/63550e7789355bcca9b57bc8')
+        //         .done(function (data) {
+        //             if (data.error) {
+        //                 $('#alert-wrapper').html(alert_markup('danger', data.message));
+        //             } else {
+        //                 $('#alert-wrapper').html('');
+        //                 $('#rsvp-modal').modal('show');
+        //             }
+        //         })
+        //         .fail(function (data) {
+        //             console.log(data);
+        //             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+        //         });
 
         // $.post('https://farrabswedding.free.beeceptor.com/error', data)
         // $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
@@ -528,4 +540,10 @@ function convertFormToJSON(form) {
     json[this.name] = this.value || "";
   });
   return json;
+}
+
+function delay() {
+    console.log('start timer');
+    // setTimeout(resolve, 1000);
+    console.log('after 1 second');
 }
