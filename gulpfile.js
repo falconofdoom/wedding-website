@@ -1,10 +1,21 @@
 "use strict";
 
 var gulp = require("gulp");
-var sass = require("gulp-sass");
-var uglify = require("gulp-uglify");
+var sass = require('gulp-sass')(require('sass'));
+
+const terser = require('gulp-plugin-terser');
 var rename = require("gulp-rename");
 var mergeStream = require('merge-stream');
+
+const options = {
+  suffix: '.min.js',
+  terserOptions: {
+    output: {
+      comments: false
+    }
+  }
+};
+
 
 // compile scss to css
 gulp.task("sass", function () {
@@ -31,13 +42,13 @@ gulp.task("sass:watch", function () {
 gulp.task("minify-js", function () {
     var scriptsJS = gulp
     .src("./js/scripts.js")
-    .pipe(uglify())
+    .pipe(terser(options))
     .pipe(rename({ basename: "scripts.min" }))
     .pipe(gulp.dest("./js"));
 
     var rsvpFormJS = gulp
     .src("./js/rsvp-form.js")
-    .pipe(uglify())
+    .pipe(terser(options))
     .pipe(rename({ basename: "rsvp-form.min" }))
     .pipe(gulp.dest("./js"));
   
