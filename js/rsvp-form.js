@@ -3,45 +3,22 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
+const RSVP_GET_PARTY_API_ENDPOINT = 'http://localhost:8080/rsvp/parties/63550e7789355bcca9b57bc8';
+
 
 $(".next").click(function(){
-    var partyInfo = getPartyByInviteCode( $('#invite_code').val());
-	
-    if(animating) return false;
-	animating = true;
-	
-	current_fs = $(this).parent();
-	next_fs = $(this).parent().next();
-	
-	//activate next step on progressbar using the index of next_fs
-	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-	
-	//show the next fieldset
-	next_fs.show(); 
-	//hide the current fieldset with style
-	current_fs.animate({opacity: 0}, {
-		step: function(now, mx) {
-			//as the opacity of current_fs reduces to 0 - stored in "now"
-			//1. scale current_fs down to 80%
-			scale = 1 - (1 - now) * 0.2;
-			//2. bring next_fs from the right(50%)
-			left = (now * 50)+"%";
-			//3. increase opacity of next_fs to 1 as it moves in
-			opacity = 1 - now;
-			current_fs.css({
-        'transform': 'scale('+scale+')',
-        'position': 'absolute'
-      });
-			next_fs.css({'left': left, 'opacity': opacity});
-		}, 
-		duration: 800, 
-		complete: function(){
-			current_fs.hide();
-			animating = false;
-		}, 
-		//this comes from the custom easing plugin
-		easing: 'easeInOutBack'
-	});
+    $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are looking for your invite.'));
+    var partyInfo = getPartyByInviteCode( $('#invite_code').val())
+    partyInfo.then(data => {
+        showRSVPForm($(this));
+        setTimeout(() => {
+            $('#alert-wrapper').html('');
+        }, 1000);
+        prefillRSVP(data)
+    }).catch(error => {
+        $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+        console.log(error);
+    });
 });
 
 $(".previous").click(function(){
@@ -79,79 +56,139 @@ $(".previous").click(function(){
 	});
 });
 
-  /**************** Get URI Parameter for Invite Code *****************/
-  var urlParams = new URLSearchParams(window.location.search);
-  var inviteCode = urlParams.get('inviteCode');
-  console.log(inviteCode);
-  $('#invite_code').val(inviteCode).trigger('change');
+/**************** Get URI Parameter for Invite Code *****************/
+var urlParams = new URLSearchParams(window.location.search);
+var inviteCode = urlParams.get('inviteCode');
+console.log(inviteCode);
+$('#invite_code').val(inviteCode).trigger('change');
 
-  /********************** RSVP **********************/
-  $('#msform').on('submit', function (e) {
-      e.preventDefault();
-      var data = convertFormToJSON($(this))
-      console.log(data);
+/********************** RSVP **********************/
+$('#msform').on('submit', function (e) {
+    e.preventDefault();
+    $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-      // $.post('https://farrabswedding.free.beeceptor.com/error', data)
-      $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
-      delay();
+    var data = transformForUpdate(convertFormToJSON($(this)))
+    updateRSVP(data).then(response => {
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Success!</strong> Your RSVP status has been updated.'));
+    }).catch(error => {
+        $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+        console.log(error);
+    });
+});
 
-      $.get('http://localhost:8080/rsvp/parties/63550e7789355bcca9b57bc8')
-              .done(function (data) {
-                  if (data.error) {
-                      $('#alert-wrapper').html(alert_markup('danger', data.message));
-                  } else {
-                      $('#alert-wrapper').html('');
-                      // $('#rsvp-modal').modal('show');
-                      $("#rsvp-guest-form-container").show();
-                      $("#rsvp-form-guest-name").val(data.guests[0].firstName + " " + data.guests[0].lastName).trigger('change');
-                  }
-              })
-              .fail(function (data) {
-                  console.log(data);
-                  $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-              });
 
-      // $.get('http://localhost:8080/rsvp/parties/63550e7789355bcca9b57bc8')
-      //         .done(function (data) {
-      //             if (data.error) {
-      //                 $('#alert-wrapper').html(alert_markup('danger', data.message));
-      //             } else {
-      //                 $('#alert-wrapper').html('');
-      //                 $('#rsvp-modal').modal('show');
-      //             }
-      //         })
-      //         .fail(function (data) {
-      //             console.log(data);
-      //             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-      //         });
+function transformForUpdate(data) {
+    delete data.rsvp_form_guest_name
+    delete data.rsvp_guest_id
+    var rsvp_guest_ids = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_guest_id'));
+    var rsvp_names = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_form_guest_name'));
+    var rsvp_statuses = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_status'));
+    var result = { "inviteCode": data.invite_code, "guests": [] };
 
-      // $.post('https://farrabswedding.free.beeceptor.com/error', data)
-      // $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
-
-      // if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
-      //     && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
-      //     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
-      // } else {
-      //     $.post('https://script.google.com/macros/s/AKfycbzUqz44wOat0DiGjRV1gUnRf4HRqlRARWggjvHKWvqniP7eVDG-/exec', data)
-      //         .done(function (data) {
-      //             console.log(data);
-      //             if (data.result === "error") {
-      //                 $('#alert-wrapper').html(alert_markup('danger', data.message));
-      //             } else {
-      //                 $('#alert-wrapper').html('');
-      //                 $('#rsvp-modal').modal('show');
-      //             }
-      //         })
-      //         .fail(function (data) {
-      //             console.log(data);
-      //             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-      //         });
-      // }
-  });
-
+    for (let i = 0; i < rsvp_names.length; i++) {
+        result.guests.push({
+            "id": rsvp_guest_ids[i][1],
+            "name": rsvp_names[i][1],
+            "rsvpStatus": rsvp_statuses[i][1]
+        });
+    }
+    return result;
+}
 
 function getPartyByInviteCode(inviteCode) {
-    return fetch('http://example.com/movies.json')
-    .then((response) => response.json())
-    .then((data) => console.log(data));
+    return fetch(RSVP_GET_PARTY_API_ENDPOINT)
+            .then((response) => response.json());
+}
+
+function updateRSVP(data) {
+    return fetch(RSVP_GET_PARTY_API_ENDPOINT, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+}
+
+function prefillRSVP(data) {
+
+    $('#plus_one_container').html(''); // clear container before prefilling
+    data.guests.forEach(guest => {
+        $('<div/>', {'class' : 'plus_one row', html: plusOneTemplateHTML()})
+        .hide()
+        .appendTo('#plus_one_container')
+        .slideDown('slow');
+    })
+    
+    data.guests.forEach((guest, index) => {
+        var fullName = guest.firstName + " " + guest.lastName
+        $(`[name=rsvp_form_guest_name${index}]`).val(fullName).trigger('change'); 
+    })
+    
+    data.guests.forEach((guest, index) => {
+        var rsvpStatus = guest.rsvpStatus
+        if(rsvpStatus === 'ATTENDING') {
+            $(`input:radio[name=rsvp_status${index}][value=ATTENDING]`).click();
+        } else {
+            $(`input:radio[name=rsvp_status${index}][value=DECLINED]`).click();
+        }
+    });
+
+    data.guests.forEach((guest, index) => {
+        var guestId = guest.id
+        $(`[name=rsvp_guest_id${index}]`).val(guestId).trigger('change'); 
+    });
+}
+
+function plusOneTemplateHTML() //Get the template and update the input field names
+{
+    var len = $('.plus_one').length;
+    var $html = $('.plus_one_template').clone();
+    $html.find('[name=rsvp_guest_id]')[0].name="rsvp_guest_id" + len;
+    $html.find('[name=rsvp_form_guest_name]')[0].name="rsvp_form_guest_name" + len;
+    var rsvpStatusHtml = $html.find('[name=rsvp_status]');
+    rsvpStatusHtml[0].name="rsvp_status" + len;
+    rsvpStatusHtml[0].id=`rsvp-status-accept${len}`;
+    rsvpStatusHtml[1].name="rsvp_status" + len;
+    rsvpStatusHtml[1].id=`rsvp-status-decline${len}`;
+
+    return $html.html();    
+}
+
+function showRSVPForm(thisForm) {
+    if(animating) return false;
+	animating = true;
+	
+	current_fs = thisForm.parent();
+	next_fs = thisForm.parent().next();
+	
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	
+	//show the next fieldset
+	next_fs.show(); 
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+        'transform': 'scale('+scale+')',
+        'position': 'absolute'
+      });
+			next_fs.css({'left': left, 'opacity': opacity});
+		}, 
+		duration: 800, 
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		}, 
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
 }
