@@ -5,7 +5,9 @@ var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
 $(".next").click(function(){
-	if(animating) return false;
+    var partyInfo = getPartyByInviteCode( $('#invite_code').val());
+	
+    if(animating) return false;
 	animating = true;
 	
 	current_fs = $(this).parent();
@@ -146,3 +148,10 @@ $(".previous").click(function(){
       //         });
       // }
   });
+
+
+function getPartyByInviteCode(inviteCode) {
+    return fetch('http://example.com/movies.json')
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+}
