@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     /***************** Waypoints ******************/
 
     $('.wp1').waypoint(function () {
@@ -204,6 +205,36 @@ $(document).ready(function () {
     });
 
     $('#add-to-cal').html(myCalendar);
+
+
+    /********************** RSVP **********************/
+    $('#rsvp-form').on('submit', function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+
+        if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
+            && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
+            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+        } else {
+            $.post('https://script.google.com/macros/s/AKfycbzUqz44wOat0DiGjRV1gUnRf4HRqlRARWggjvHKWvqniP7eVDG-/exec', data)
+                .done(function (data) {
+                    console.log(data);
+                    if (data.result === "error") {
+                        $('#alert-wrapper').html(alert_markup('danger', data.message));
+                    } else {
+                        $('#alert-wrapper').html('');
+                        $('#rsvp-modal').modal('show');
+                    }
+                })
+                .fail(function (data) {
+                    console.log(data);
+                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+                });
+        }
+    });
+
 });
 
 /********************** Extras **********************/
@@ -460,18 +491,3 @@ var MD5 = function (string) {
 
     return temp.toLowerCase();
 };
-
-function convertFormToJSON(form) {
-  var array = $(form).serializeArray(); // Encodes the set of form elements as an array of names and values.
-  var json = {};
-  $.each(array, function () {
-    json[this.name] = this.value || "";
-  });
-  return json;
-}
-
-function delay() {
-    console.log('start timer');
-    // setTimeout(resolve, 1000);
-    console.log('after 1 second');
-}

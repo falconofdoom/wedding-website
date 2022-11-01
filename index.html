@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery.fancybox.css">
     <link rel="stylesheet" href="css/flexslider.css">
-    <link rel="stylesheet" href="css/rsvp-form.min.css">
     <link rel="stylesheet" href="css/styles.min.css">
     <link rel="stylesheet" href="css/queries.css">
     <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
@@ -401,52 +400,52 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-
-                <form id="msform" class="rsvp-form" action method="POST" >
-                    <!-- progressbar -->
-                    <ul id="progressbar">
-                        <li class="active">RSVP Invite Code</li>
-                        <li>Account Setup</li>
-                    </ul>
+                <h3>What are you waiting for?</h3>
+                <p>We would greatly appreciate if you could RSVP before 1st of November '17</p>
+                <form id="rsvp-form" class="rsvp-form"
+                      action=""
+                      method="POST">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-input-group">
+                                <i class="fa fa-envelope"></i><input type="email" name="email" class=""
+                                                                     placeholder="Your email"
+                                                                     required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-input-group">
+                                <i class="fa fa-user"></i><input name="name" class=""
+                                                                 placeholder="Your name"
+                                                                 required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-input-group">
+                                <i class="fa fa-users"></i><input type="number" name="extras" class="" min="0"
+                                                                  max="4"
+                                                                  placeholder="Husband/Wife or kids"
+                                                                  required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-input-group">
+                                <i class="fa fa-key"></i><input type="number" name="invite_code" id="invite_code"
+                                                                class="" min="0"
+                                                                placeholder="Invite code"
+                                                                required>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12" id="alert-wrapper"></div>
                     </div>
-                    <!-- fieldsets -->
-                    <fieldset>
-                        <h2 class="fs-title">RSVP Invite Code</h2>
-                        <h3 class="fs-subtitle">Input your invite code here to RSVP</h3>
-                        <input type="text" name="invite_code" id="invite_code" placeholder="RSVP Code"/>
-                        <!-- <input type="button" name="next" class="next action-button" value="Next"> -->
-                        <a class="btn btn-accent btn-small next"><i class="fa fa-arrow-right"></i>&nbsp;&nbsp;Next</a>
-                    </fieldset>
-                    <fieldset>
-                        <h2 class="fs-title">We found your invite!</h2>
-                        <h3 class="fs-subtitle">Let us know who's coming with you!</h3>
-                        <div class="plus_one_template">
-                            <input type="text" name="rsvp_guest_id" placeholder="ID" readonly hidden/>
-
-                            <div class="col-md-7">
-                                <input type="text" name="rsvp_form_guest_name" placeholder="Name"/>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="col-md-5">
-                                    <input type="radio" class="form-check-input" id="rsvp-status-accept" name="rsvp_status" value="ATTENDING"/>
-                                    <label class="form-check-label" for="rsvp-status-accept">Accept</label>
-                                </div>
-                                <div class="col-md-5">
-                                    <input type="radio" class="form-check-input" id="rsvp-status-decline" name="rsvp_status" value="DECLINED"/>
-                                    <label class="form-check-label" for="rsvp-status-decline">Decline</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="plus_one_container">
-
-                        </div>
-
-                        <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                        <input type="submit" name="submit" class="submit action-button" value="Submit"/>
-                    </fieldset>
-
+                    <button class="btn-fill rsvp-btn">
+                        Yes,
+                        that's me!
+                    </button>
                 </form>
             </div>
         </div>
@@ -473,8 +472,6 @@
 <script src="node_modules/waypoints/lib/jquery.waypoints.min.js"></script>
 <script src="js/vendor/ouical.js"></script>
 <script src="js/scripts.min.js"></script>
-<script src="node_modules/jquery.easing/jquery.easing.min.js"></script>
-<script src="js/rsvp-form.min.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlPw3GQYI3faa_9mRE6plWuM7xNEmrwH0&callback=initMap"></script>
 <!-- Google Analytics -->
