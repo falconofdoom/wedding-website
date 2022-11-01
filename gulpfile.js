@@ -55,5 +55,18 @@ gulp.task("minify-js", function () {
     return mergeStream(scriptsJS, rsvpFormJS);
 });
 
+gulp.task('lib', function () {
+  var animateCSS = 'node_modules/animate.css';
+  var fontAwesome = 'node_modules/font-awesome';
+  var waypoints = 'node_modules/waypoints';
+  var jqueryEasing = 'node_modules/jquery.easing';
+  var animateCSSStream = gulp.src([`${animateCSS}/**/*`]).pipe(gulp.dest(`./dist/${animateCSS}`));
+  var fontAwesomeStream = gulp.src([`${fontAwesome}/**/*`]).pipe(gulp.dest(`./dist/${fontAwesome}`));
+  var waypointsStream = gulp.src([`${waypoints}/**/*`]).pipe(gulp.dest(`./dist/${waypoints}`));
+  var jqueryEasingStream = gulp.src([`${jqueryEasing}/**/*`]).pipe(gulp.dest(`./dist/${jqueryEasing}`));
+
+  return mergeStream(animateCSSStream, fontAwesomeStream, waypointsStream, jqueryEasingStream);
+});
+
 // default task
-gulp.task("default", gulp.series("sass", "minify-js"));
+gulp.task("default", gulp.series("sass", "minify-js", "lib"));
