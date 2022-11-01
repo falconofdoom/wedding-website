@@ -3,7 +3,7 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-const RSVP_GET_PARTY_API_ENDPOINT = 'https://5ksdoldqa1.execute-api.us-east-1.amazonaws.com/production/rsvp/parties/30d6c915-79fa-44e3-9688-bd441b42bea0';
+const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties/30d6c915-79fa-44e3-9688-bd441b42bea0';
 
 
 $(".next").click(function(){
@@ -98,7 +98,7 @@ function transformForUpdate(data) {
 function getPartyByInviteCode(inviteCode) {
     return fetch(RSVP_GET_PARTY_API_ENDPOINT, {
         headers: {
-            'x-api-key': 'fJiFCyyuDf3QB8iBG6UJv8gTrNWFXpgI9sAvfvOw'
+            'x-api-key': 'j6dXUMr5I66iANmJFL5Iqm8TCh1xhsC3ayRsoyui'
         }
     }).then((response) => response.json());
 }
@@ -109,6 +109,7 @@ function updateRSVP(data) {
         body: JSON.stringify(data),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
+          'x-api-key': 'j6dXUMr5I66iANmJFL5Iqm8TCh1xhsC3ayRsoyui'
         },
       })
 }
