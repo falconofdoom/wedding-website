@@ -20,13 +20,18 @@
   "homepage": "https://github.com/rampatra/wedding-website",
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-plugin-terser": "^2.1.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-uglify": "^3.0.2"
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "merge-stream": "^2.0.0",
+    "sass": "^1.55.0",
+    "terser": "^5.15.1"
   },
   "dependencies": {
     "animate.css": "^3.7.2",
     "font-awesome": "^4.7.0",
+    "jquery.easing": "^1.4.1",
     "waypoints": "^4.0.1"
   }
 }
