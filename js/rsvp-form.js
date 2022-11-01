@@ -3,7 +3,7 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-const RSVP_GET_PARTY_API_ENDPOINT = 'http://localhost:8080/rsvp/parties/63550e7789355bcca9b57bc8';
+const RSVP_GET_PARTY_API_ENDPOINT = 'https://5ksdoldqa1.execute-api.us-east-1.amazonaws.com/production/rsvp/parties/30d6c915-79fa-44e3-9688-bd441b42bea0';
 
 
 $(".next").click(function(){
@@ -96,8 +96,11 @@ function transformForUpdate(data) {
 }
 
 function getPartyByInviteCode(inviteCode) {
-    return fetch(RSVP_GET_PARTY_API_ENDPOINT)
-            .then((response) => response.json());
+    return fetch(RSVP_GET_PARTY_API_ENDPOINT, {
+        headers: {
+            'x-api-key': 'fJiFCyyuDf3QB8iBG6UJv8gTrNWFXpgI9sAvfvOw'
+        }
+    }).then((response) => response.json());
 }
 
 function updateRSVP(data) {
