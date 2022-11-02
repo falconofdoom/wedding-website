@@ -3,7 +3,7 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties/30d6c915-79fa-44e3-9688-bd441b42bea0';
+const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties';
 
 
 $(".next").click(function(){
@@ -78,6 +78,7 @@ $('#msform').on('submit', function (e) {
 
 
 function transformForUpdate(data) {
+    data.id = data.rsvp_guest_id;
     delete data.rsvp_form_guest_name
     delete data.rsvp_guest_id
     var rsvp_guest_ids = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_guest_id'));
@@ -88,7 +89,6 @@ function transformForUpdate(data) {
     for (let i = 0; i < rsvp_names.length; i++) {
         result.guests.push({
             "id": rsvp_guest_ids[i][1],
-            "name": rsvp_names[i][1],
             "rsvpStatus": rsvp_statuses[i][1]
         });
     }
@@ -96,7 +96,8 @@ function transformForUpdate(data) {
 }
 
 function getPartyByInviteCode(inviteCode) {
-    return fetch(RSVP_GET_PARTY_API_ENDPOINT, {
+    console.log(inviteCode);
+    return fetch(`${RSVP_GET_PARTY_API_ENDPOINT}/${inviteCode}`, {
         headers: {
             'x-api-key': 'j6dXUMr5I66iANmJFL5Iqm8TCh1xhsC3ayRsoyui'
         }
