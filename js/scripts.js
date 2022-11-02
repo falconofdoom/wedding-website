@@ -210,7 +210,7 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var location = {lat: 22.5932759, lng: 88.27027720000001};
+    var location = {lat: 14.1204142, lng: 120.9351858};
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
         center: location,
