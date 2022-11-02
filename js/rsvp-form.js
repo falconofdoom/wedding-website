@@ -78,7 +78,6 @@ $('#msform').on('submit', function (e) {
 
 
 function transformForUpdate(data) {
-    data.id = data.rsvp_guest_id;
     delete data.rsvp_form_guest_name
     delete data.rsvp_guest_id
     var rsvp_guest_ids = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_guest_id'));
@@ -105,7 +104,7 @@ function getPartyByInviteCode(inviteCode) {
 }
 
 function updateRSVP(data) {
-    return fetch(`${RSVP_GET_PARTY_API_ENDPOINT}/${data.id}`, {
+    return fetch(`${RSVP_GET_PARTY_API_ENDPOINT}/${data.invite_code}`, {
         method: 'PATCH',
         body: JSON.stringify(data),
         headers: {
