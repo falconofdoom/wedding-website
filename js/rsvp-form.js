@@ -104,6 +104,8 @@ function getPartyByInviteCode(inviteCode) {
 }
 
 function updateRSVP(data) {
+    console.log("In update");
+    console.log(JSON.stringify(data));
     return fetch(`${RSVP_GET_PARTY_API_ENDPOINT}/${data.inviteCode}`, {
         method: 'PATCH',
         body: JSON.stringify(data),
