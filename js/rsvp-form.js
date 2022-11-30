@@ -3,7 +3,8 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties';
+const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/inviteCode';
+const RSVP_UPDATE_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties';
 
 
 $(".next").click(function(){
@@ -106,7 +107,7 @@ function getPartyByInviteCode(inviteCode) {
 function updateRSVP(data) {
     console.log("In update");
     console.log(JSON.stringify(data));
-    return fetch(`${RSVP_GET_PARTY_API_ENDPOINT}/${data.inviteCode}`, {
+    return fetch(`${RSVP_UPDATE_PARTY_API_ENDPOINT}/${data.inviteCode}`, {
         method: 'PATCH',
         body: JSON.stringify(data),
         headers: {
