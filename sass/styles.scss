@@ -252,7 +252,7 @@ Hero
 ========================================================================== */
 .hero {
   min-height: 750px;
-  background: url('../img/prenup.jpg') center center;
+  background: url('../img/hero-min.png') center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -278,11 +278,11 @@ Hero
     margin-bottom: 80px;
   }
   .hero-content {
-    padding-top: 40%;
+    padding-top: 35%;
   }
   .hero-content img {
     width: 55%;
-    margin-bottom: 12%;
+    margin-bottom: 10%;
   }
 }
 .navigation {
@@ -318,7 +318,7 @@ header {
     display: inline-block;
   }
   .logo img {
-    height: 19px;
+    height: 40px;
   }
   ul.primary-nav {
     margin: 0 0 0 75px;
