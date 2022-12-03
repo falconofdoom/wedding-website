@@ -3,7 +3,8 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/inviteCode';
+// const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/inviteCode';
+const RSVP_GET_PARTY_API_ENDPOINT = 'https://4d746379-8579-413b-9134-5e5cc60f939f.mock.pstmn.io/production/rsvp/inviteCode'
 const RSVP_UPDATE_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties';
 
 
@@ -91,7 +92,7 @@ function transformForUpdate(data) {
     var rsvp_guest_ids = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_guest_id'));
     var rsvp_names = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_form_guest_name'));
     var rsvp_statuses = Object.entries(data).filter(([key, value])  => key.startsWith('rsvp_status'));
-    var result = { "inviteCode": data.invite_code, "guests": [] };
+    var result = { "inviteCode": data.rsvp_id, "guests": [] };
 
     for (let i = 0; i < rsvp_names.length; i++) {
         result.guests.push({
@@ -133,6 +134,8 @@ function prefillRSVP(data) {
         .appendTo('#plus_one_container')
         .slideDown('slow');
     })
+
+    $(`[name=rsvp_id]`).val(data.id).trigger('change');
     
     data.guests.forEach((guest, index) => {
         var fullName = guest.firstName + " " + guest.lastName
