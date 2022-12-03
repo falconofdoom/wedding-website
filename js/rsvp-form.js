@@ -3,8 +3,7 @@
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
-// const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/inviteCode';
-const RSVP_GET_PARTY_API_ENDPOINT = 'https://4d746379-8579-413b-9134-5e5cc60f939f.mock.pstmn.io/production/rsvp/inviteCode'
+const RSVP_GET_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/inviteCode';
 const RSVP_UPDATE_PARTY_API_ENDPOINT = 'https://ju331w77pk.execute-api.us-east-1.amazonaws.com/production/rsvp/parties';
 
 
