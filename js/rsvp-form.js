@@ -64,6 +64,13 @@ console.log(inviteCode);
 $('#invite_code').val(inviteCode).trigger('change');
 
 /********************** RSVP **********************/
+
+$("#msform").bind("keypress", function(e) {
+    if (e.keyCode == 13) {
+        return false;
+    }
+});
+
 $('#msform').on('submit', function (e) {
     e.preventDefault();
     $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
