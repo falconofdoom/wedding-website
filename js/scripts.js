@@ -234,6 +234,8 @@ function initMap() {
 
 // Google map with hotels
 function initHotelMap() {
+    initMap();
+    
     let weddingLocation = { name: "Hillbarn Tagaytay", lat: 14.120304069369174, lng: 120.93529811555648 };
     let hotelLocations = [
       {name: "Hotel Kimberly Tagaytay", lat: 14.122153261754372, lng: 120.9343535711589},
