@@ -174,6 +174,15 @@ $(document).ready(function () {
         $('#btn-show-content').toggleClass('toggle-map-content');
     });
 
+    $('#hotel-btn-show-map').click(function () {
+        $('#hotel-map-content').toggleClass('toggle-map-content');
+        $('#hotel-map-btn-show-content').toggleClass('toggle-map-content');
+    });
+    $('#hotel-map-btn-show-content').click(function () {
+        $('#hotel-map-content').toggleClass('toggle-map-content');
+        $('#hotel-map-btn-show-content').toggleClass('toggle-map-content');
+    });
+
     /********************** Add to Calendar **********************/
     var myCalendar = createCalendar({
         options: {
@@ -223,18 +232,46 @@ function initMap() {
     });
 }
 
-function initBBSRMap() {
-    var la_fiesta = {lat: 20.305826, lng: 85.85480189999998};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+// Google map with hotels
+function initHotelMap() {
+    let weddingLocation = { name: "Hillbarn Tagaytay", lat: 14.120304069369174, lng: 120.93529811555648 };
+    let hotelLocations = [
+      {name: "Hotel Kimberly Tagaytay", lat: 14.122153261754372, lng: 120.9343535711589},
+      {name: "Via Appia Tagaytay", lat: 14.11332583907323, lng: 120.94376085573168},
+      {name: "Tagaytay Wingate Manor", lat: 14.118824444553194, lng: 120.94501826116978},
+      {name: "Escala Tagaytay", lat: 14.094372815938607, lng: 120.9410960158845},
+      {name: "The Lake Hotel Tagaytay", lat: 14.10183725293323, lng: 120.94848570593055},
+      {name: "Taal Vista Hotel", lat: 14.095419892303322, lng: 120.93466259797509},
+      {name: "Casa Suarez", lat: 14.120168138945191, lng: 120.93362303414361},
+//      {name: "Casa Ryu (Located in Casa Suarez) via AirBNB", lat: 14.120168138945191, lng: 120.93362303414361},
+//      {name: "Casa 0 (Located in Casa Suarez) via AirBNB", lat: 14.120168138945191, lng: 120.120168138945191},
+      {name: "The Tiny House", lat: 14.119118185087734, lng: 120.9340342557312},
+//    {name: "Casa Zella via AirBNB", lat: 14.102739044829312, lng: 120.95037972019283},
+//      {name: "Yzee's Staycation via AirBNB", lat: 14.102739044829312, lng: 120.95037972019283},
+      {name: "Wind Residence Tower 3 via AirBNB", lat: 14.100138196413372, lng: 120.94390343785592},
+    ];
+    
+    var map = new google.maps.Map(document.getElementById('hotel-map-canvas'), {
         zoom: 15,
-        center: la_fiesta,
+        center: weddingLocation,
         scrollwheel: false
     });
 
     var marker = new google.maps.Marker({
-        position: la_fiesta,
+        position: weddingLocation,
         map: map
     });
+    
+    let markers = [];
+    
+    for (let i = 0; i < hotelLocations.length; i++) {
+      markers[i] = new google.maps.Marker({
+        position: hotelLocations[i],
+        map: map
+        /* animation: google.maps.Animation.DROP, */
+        /* icon: markerIcon, */
+      });
+   }
 }
 
 // alert_markup

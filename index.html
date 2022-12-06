@@ -820,6 +820,60 @@
     </div>
 </section>
 
+<section id="hotel-map" class="hotel-map section-padding">
+    <div class="text-center">
+        <h3>Nearby Accomodations?</h3>
+        <h4>We can't cover the costs of your accomodations but we can help you find one. Take a look at the ones we've curated below.</h4>
+    </div>
+    <div id="hotel-map-canvas"></div>
+    <div id="hotel-map-content-wrapper" class="container pointer-events-none">
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
+                <div class="text-center">
+                    <div id="hotel-map-btn-show-content" class="toggle-map-content pointer-events-auto">
+                        <i class="fa fa-info-circle"></i>&nbsp;&nbsp; Show info
+                    </div>
+                </div>
+                <div id="hotel-map-content" class="pointer-events-auto">
+                    <div class="row">
+                        <div class="col-md-6 hotel-map-links">
+                            <h4>Hotels</h4>
+                            <ul>
+                                <li><strong>Hotel Kimberly</strong><a href="https://shorturl.at/dPV02"> | Book via Agoda</a></li>
+                                <li><strong>Via Appia Tagaytay</strong><a href="https://shorturl.at/gqBST"> | Book via Agoda</a></li>
+                                <li><strong>Tagaytay Wingate Manor</strong><a href="https://shorturl.at/nIKTW"> | Book via Agoda</a></li>
+                                <li><strong>Escala Tagaytay</strong><a href="https://shorturl.at/kGS06"> | Book via Agoda</a></li>
+                                <li><strong>The Lake Hotel</strong><a href="https://shorturl.at/jxyHZ"> | Book via Agoda</a></li>
+                                <li><strong>Taal Vista Hotel</strong><a href="https://shorturl.at/mAPV2"> | Book via Agoda</a></li>
+                                <li><strong>Twin Pines Suites</strong><a href="https://shorturl.at/fwTX6"> | Book via Agoda</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 hotel-map-links">
+                            <h4>AirBnbs</h4>
+                            <ul>
+                                <li><strong>Casa Ryu</strong> (up to 8pax, 3 mins walk to Hillbarn Tagaytay)<a href="https://shorturl.at/fISZ2"> | Book via AirBnb</a></li>
+                                <li><strong>Casa Suarez</strong> (up to 10 pax, 3 mins walk to Hillbarn Tagaytay)<a href="https://shorturl.at/mtG29"> | Book via AirBnb</a></li>
+                                <li><strong>The tiny house</strong>(up to 6 pax, 5 mins walk to hillbarn)<a href="https://www.facebook.com/thetinyhousetagaytay"> | Book via AirBnb</a></li>
+                                <li><strong>Casa O </strong>(up to 3 pax)<a href="https://shorturl.at/ciGNY"> | Book via AirBnb</a></li>
+                                <li><strong>Casa Zella </strong>(up to 6 pax)<a href="https://shorturl.at/lO258"> | Book via AirBnb</a></li>
+                                <li><strong>Yzee's Staycation</strong><a href="https://shorturl.at/bjmwB"> | Book via AirBnb</a></li>
+                                <li><strong>Wind residence</strong><a href="https://shorturl.at/aBV47"> | Book via AirBnb</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-11" style="padding: 5px;">
+                            <a class="btn btn-accent btn-small" id="hotel-btn-show-map"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Show
+                                map</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <section class="rsvp text-center" id="rsvp">
 
     <div id="rsvp-modal" class="modal fade" tabindex="-1" role="dialog">
@@ -918,6 +972,9 @@
 <script src="js/rsvp-form.min.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaxV0rFy5wDaC7MW2nMvkIWP5eNq46jyA&callback=initMap"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaxV0rFy5wDaC7MW2nMvkIWP5eNq46jyA&callback=initHotelMap"></script>
+
 <!-- Google Analytics -->
 <script>
     (function (i, s, o, g, r, a, m) {
