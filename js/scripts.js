@@ -219,15 +219,19 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var location = {lat: 14.1204142, lng: 120.9351858};
+    let weddingLocation = { name: "Hillbarn Tagaytay", lat: 14.120304069369174, lng: 120.93529811555648 };
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
-        center: location,
-        scrollwheel: false
+        center: weddingLocation,
+        scrollwheel: false,
+        mapTypeControl: false,
+        panControl: false,
+        zoomControl: false,
+        streetViewControl: false,
     });
 
     var marker = new google.maps.Marker({
-        position: location,
+        position: weddingLocation,
         map: map
     });
 }
@@ -235,7 +239,7 @@ function initMap() {
 // Google map with hotels
 function initHotelMap() {
     initMap();
-    
+
     let weddingLocation = { name: "Hillbarn Tagaytay", lat: 14.120304069369174, lng: 120.93529811555648 };
     let hotelLocations = [
       {name: "Hotel Kimberly Tagaytay", lat: 14.122153261754372, lng: 120.9343535711589},
