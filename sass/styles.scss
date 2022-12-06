@@ -665,6 +665,35 @@ Features-stack
 }
 
 /* ==========================================================================
+.entourage
+========================================================================== */
+.entourage {
+  @media (min-width: 768px) {
+    .leftcol {
+      // border-right: solid 1px #FFD700;
+      padding-left: 100px;
+    }
+
+    .midcol {
+      // padding-right: 100px;
+      border-right: solid 1px #FFD700;
+      border-left: solid 1px #FFD700;
+    }
+
+    .rightcol {
+    }
+  }
+
+
+  .time {
+    font-size: 13px;
+    font-style: italic;
+    text-transform: lowercase;
+    color: $txt-primary;
+  }
+}
+
+/* ==========================================================================
 Instagram
 ========================================================================== */
 #instagram {
