@@ -1,6 +1,7 @@
 // Layout variables partial
 
 $section-padding: 40px 0;
+$section-padding-no-bottom: 40px 0 0;
 
 section.intro, section.features-extra, section.rsvp, section.faqs {
 	background: $section-light;
