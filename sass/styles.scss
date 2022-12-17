@@ -109,6 +109,55 @@ section .header {
   background-color: #000;
   border-radius: 4px;
 }
+
+.text-start {
+  text-align: left !important;
+}
+.text-end {
+  text-align: right !important;
+}
+
+// SM
+@media (min-width: 576px) {
+  .text-sm-start {
+    text-align: left !important;
+  }
+  .text-sm-end {
+    text-align: right !important;
+  }
+}
+
+// MD
+@media (min-width: 768px) {
+  .text-md-start {
+    text-align: left !important;
+  }
+
+  .text-md-end {
+    text-align: right !important;
+  }
+}
+// LG
+@media (min-width: 992px) {
+  .text-lg-start {
+    text-align: left !important;
+  }
+
+  .text-lg-end {
+    text-align: right !important;
+  }
+}
+
+// LG
+@media (min-width: 1200px) {
+  .text-xl-start {
+    text-align: left !important;
+  }
+
+  .text-xl-end {
+    text-align: right !important;
+  }
+}
 /* ==========================================================================
 Animations
 ========================================================================== */
@@ -673,19 +722,28 @@ Features-stack
 .entourage
 ========================================================================== */
 .entourage {
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     .leftcol {
       // border-right: solid 1px #FFD700;
-      padding-left: 100px;
+      // padding-left: 100px;
+      margin-bottom: 0em !important;
     }
 
     .midcol {
       // padding-right: 100px;
-      border-right: solid 1px #FFD700;
+      // border-right: solid 1px #FFD700;
       border-left: solid 1px #FFD700;
     }
 
     .rightcol {
+    }
+  }
+
+  @media (min-width: 200px) {
+    .leftcol {
+      // border-right: solid 1px #FFD700;
+      // padding-left: 100px;
+      margin-bottom: 1em;
     }
   }
 
