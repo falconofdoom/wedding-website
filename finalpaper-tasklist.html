@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* Custom CSS for status colors */
+        .status-done {
+            color: green;
+        }
+
+        .status-in-progress {
+            color: orange;
+        }
+
+        .status-not-started {
+            color: red;
+        }
+
+        /* Custom CSS for indentation and icons */
+        .section {
+            margin-left: 0;
+        }
+
+        .subsection {
+            margin-left: 40px; /* Increased indentation for subsections */
+        }
+
+        .fa-icon {
+            margin-right: 10px;
+        }
+
+        /* Custom CSS for subsection labels and content */
+        .subsection-headings {
+            margin-left: 20px; /* Indent subsection headings */
+        }
+
+        .section-contents {
+            margin-left: 20px; /* Increased indentation for section-contents */
+        }
+
+        .subsection-contents {
+            margin-left: 60px; /* Increased indentation for subsection-contents */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Task List</h2>
+
+        <!-- Section 1 -->
+        <div class="section">
+            <h3><i class="fas fa-check-circle fa-icon status-done"></i> Section 1: Introduction</h3>
+                <div class="section-contents">
+                    <p><i class="fas fa-check-circle fa-icon status-done"></i> Status: DONE</p>
+                </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+            <h3><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Section 2: Review of Related Literature</h3>
+                <div class="section-contents">
+                    <p><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Status: IN_PROGRESS</p>
+                    <p><i class="fas fa-comment fa-icon"></i> Comments: Progress unknown</p>
+                </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+            <h3><i class="fas fa-circle fa-icon status-not-started"></i> Section 3: Methodology</h3>
+                <div class="section-contents">
+                    <p><i class="fas fa-circle fa-icon status-not-started"></i> Status: NOT_STARTED</p>
+                </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+            <h3><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Section 4: Review of Related Literature</h3>
+            <div class="subsection">
+                <div class="section-contents">
+                    <p><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Status: IN_PROGRESS</p>
+                </div>
+                <div class="subsection-headings">
+                    <h4><i class="fas fa-arrow-right fa-icon"></i> Subsection 4.1: What are the problems in analyzing financial statements of PhilHealth?</h4>
+                </div>
+                <div class="subsection-contents">
+                    <p><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Status: IN_PROGRESS</p>
+                    <p><i class="fas fa-comment fa-icon"></i> Comments: Needs more studies and metrics to be supported by 2.1</p>
+                </div>
+                <div class="subsection-headings">
+                    <h4><i class="fas fa-arrow-right fa-icon"></i> Subsection 4.2: "How effective are the following methods in analyzing the financial status of PhilHealth?"</h4>
+                </div>
+                <div class="subsection-contents">
+                    <p><i class="fas fa-check-circle fa-icon status-done"></i> Status: DONE</p>
+                </div>
+                <div class="subsection-headings">
+                    <h4><i class="fas fa-arrow-right fa-icon"></i> Subsection 4.3: How effective are accounting ratios in analyzing the financial status of PhilHealth?</h4>
+                </div>
+                <div class="subsection-contents">
+                    <p><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Status: IN_PROGRESS</p>
+                    <p><i class="fas fa-comment fa-icon"></i> Comments: Needs more explanations kasi I only plastered yung accounting ratios there</p>
+                </div>
+                <div class="subsection-headings">
+                    <h4><i class="fas fa-arrow-right fa-icon"></i> Subsection 4.4: How can the financial statement analysis help manage PhilHealth?</h4>
+                </div>
+                <div class="subsection-contents">
+                    <p><i class="fas fa-spinner fa-pulse fa-icon status-in-progress"></i> Status: IN_PROGRESS</p>
+                    <p><i class="fas fa-comment fa-icon"></i> Comments: Revise, add more data related to sections 4.1 and 2</p>
+                </div>
+                <div class="subsection-headings">
+                    <h4><i class="fas fa-arrow-right fa-icon"></i> Subsection 4.5: Is there a correlation between the horizontal and vertical analysis of analyzing PhilHealth financial statements?</h4>
+                </div>
+                <div class="subsection-contents">
+                    <p><i class="fas fa-circle fa-icon status-not-started"></i> Status: NOT_STARTED</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+            <h3><i class="fas fa-circle fa-icon status-not-started"></i> Section 5: Conclusion</h3>
+            <div class="section-contents">
+                <p><i class="fas fa-circle fa-icon status-not-started"></i> Status: NOT_STARTED</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
